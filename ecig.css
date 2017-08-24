@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+      html, body {
+       font-family: 'bitter', slab-serif;
+		font-size: 16px;
+		color: #333;
+		 height: 100%; 
+		padding: 0;
+		width: 100%;
+		}
+	#map-outer {height: 530px; float: left; width: 100%; padding: 0px; border: 0; margin-bottom:0; background-color:#FFF }
+	  #map-container { height: 100%; }
+	  @media all and (max-width: 820px) {
+		#map-outer  { height: 650px }
+		}
+.container {
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	}
+.borderTop {
+   border-top-color: #333333;
+   border-top-style: solid;
+   margin-left: 5px;
+}   
+ol {
+    list-style-type: none;
+    margin-top: 30px;
+	margin-bottom: 0;
+    padding: 0;
+    overflow: hidden;
+	
+}
+
+p {
+font-size: 8px;
+}
+
+.btn {
+  background-color: #D4D4DE;
+   font-family: 'bitter', slab-serif;
+	font-size: 14px;
+	padding-top: 5px;
+	margin-top: 5px;
+	color: #28285B;
+	border: 0;
+	border-radius:0;
+	border-style: none;
+	box-shadow: none;
+	text-decoration: none;
+   }
+.btn:active {
+  background-color: #28285B;
+	 font-weight: bold;
+  color: white;
+ } 
+ .btn:focus {
+  background-color: #28285B;
+	 font-weight: bold;
+  color: white;
+ } 
+
+.btn:primary {
+  background-color: #28285B;
+	 font-weight: bold;
+  color: white;
+ } 
+.btn:hover {
+  background-color: #EAEAEF;
+	 font-weight: bold;
+  color: black;
+ } 
+ 
+  .selected {
+   background-color: #28285B;
+	 font-weight: bold;
+  color: white;
+ } 
+ .mystyle {
+     background-color: #28285B;
+	 font-weight: bold;
+  color: white;
+  font-family: 'bitter', slab-serif;
+	font-size: 14px;
+	padding: 1px;
+	 border-style: none;
+	
+  text-decoration: none;
+  outline-width: none;
+  outline-color: #000000;
+   
+}
+
+   
+table, td {
+    border: 1px solid black;
+}
