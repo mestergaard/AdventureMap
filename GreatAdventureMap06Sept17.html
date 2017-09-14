@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Great Adventure Map</title>
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsKlHVAOuzE-jumMBqD2s8MkBfOlng0tY&libraries=drawing,geometry">
+</script>
+       <script  src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script> 
+    <script src="https://cdn.rawgit.com/googlemaps/js-map-label/gh-pages/src/maplabel-compiled.js"></script>
+
+    <script>
+      function initMap() {
+        var myLatlng = new google.maps.LatLng(55, -1);
+        var myOptions = {
+          zoom: 6,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles:[
+    {
+        "featureType": "administrative",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#444444"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.country",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#46e8ec"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "lightness": "48"
+            }
+        ]
+    }
+]
+        };
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
+  
+//  add data layer 
+       var infoWin = new google.maps.InfoWindow();
+          map.data.loadGeoJson('https://cdn.rawgit.com/mestergaard/AdventureMap/50af7f50/Places.geojson',     null, function (features) {
+    
+        var markers = features.map(function (feature) {
+        image= {
+           url: feature.getProperty('icon'),
+           scaledSize: new google.maps.Size(8,8)
+               }
+            var g = feature.getGeometry();
+             var marker = new google.maps.Marker({ 
+                'position': g.get(0),
+                icon: image,  
+               
+               });
+          
+     /*  //maplabel
+              
+             var mapLabel = new MapLabel({
+              text: feature.getProperty('Place / Route Name'),
+              position: g.get(0),
+              map: map,
+              fontSize: 11,
+             // align: 'right',
+            strokeWeight: 1,
+            fontColor: '#990900'
+                  
+            });
+      
+  
+            mapLabel.set('position', g.get(0));
+          marker.bindTo('map', mapLabel);
+          marker.bindTo('position', mapLabel);  
+    */
+ 
+          map.data.setStyle(function(feature) {
+        image= {
+            url: feature.getProperty('icon'),
+            scaledSize: new google.maps.Size(12, 12),
+          }
+        return /** @type {google.maps.Data.StyleOptions}*/ {
+            icon: image,
+            visible: false
+         };
+});          
+       
+       
+        google.maps.event.addListener(marker, 'click', function(evt) {
+            infoWin.setContent('<div><strong>' + feature.getProperty('Sub-category') +'<br>' + "Place name: </strong>" + feature.getProperty('Place / Route Name')+ '<br>' +'<strong> Data source: </strong>'+feature.getProperty('Sources') );
+            infoWin.open(map, marker);
+            
+        
+            
+            })    
+          return marker;   
+           
+        }); 
+       var markerCluster = new MarkerClusterer(map, markers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });        
+     
+              
+    }); 
+       
+          
+          
+          
+      
+    
+      }
+      google.maps.event.addDomListener(window, 'load', initMap);
+       
+        
+      
+        
+    </script>
+   
+  </head>
+  <body>
+    
+    <div id="map" style="width: 1000px; height: 1000px; float: left"></div>
+
+  
+  </body>
+</html>
